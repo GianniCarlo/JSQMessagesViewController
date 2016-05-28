@@ -13,50 +13,36 @@ class ConversationTableViewCell: UITableViewCell {
 }
 
 import UIKit
+import JSQMessagesViewController
+
+/**
+ *  ViewController that lists your conversations
+ *  
+ *  It shows the name of the conversation and its last message
+ */
+
 class ConversationsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView?
-    
     var conversations = [Conversation]()
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.conversations = getConversation()
-        self.tableView?.reloadData()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Hides empty cells
+        /**
+         *  Hides empty cells
+         */
         tableView?.tableFooterView = UIView()
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return conversations.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let conversation = conversations[indexPath.row]
-        guard let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as? ConversationTableViewCell else {
-            return UITableViewCell()
-        }
-        //        cell.avatarView.setup(conversation.patientId)
-        cell.nameLabel.text = "Chat with The Guys"
         
-        cell.recentTextLabel.text = conversation.latestMessage
+        /**
+         *  Load conversations from DB
+         */
+        self.conversations = getConversations()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        // Check if the conversation is read and apply Bold/Not Bold to the text to indicate Read/Unread state
-        !conversation.isRead ? cell.nameLabel.font = cell.nameLabel.font.bold() : (cell.nameLabel.font = cell.nameLabel.font.withTraits([]))
-
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("ConversationSegue", sender: indexPath.row)
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        self.tableView?.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -66,18 +52,68 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
         }
     }
     
-    //MARK: Helper Methods for formating phone numbers
-    func formatPhoneNumber(phoneNumber: String?) -> String {
-        guard var phoneNumber = phoneNumber else {
-            return ""
-        }
-        if phoneNumber.characters.count == 10 {
-            phoneNumber.insert("(", atIndex: phoneNumber.startIndex)
-            phoneNumber.insert(")", atIndex: phoneNumber.startIndex.advancedBy(4))
-            phoneNumber.insert("-", atIndex: phoneNumber.startIndex.advancedBy(8))
-        }
-        return phoneNumber
+    //MARK: TableView DataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return conversations.count
     }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as? ConversationTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let conversation = self.conversations[indexPath.row]
+        
+        cell.nameLabel.text = conversation.name
+        
+        /**
+         *  Setup preview of last message
+         */
+        
+        // Don't show preview if there's no last message
+        guard let lastMessage = conversation.messages.last else {
+            return cell
+        }
+        
+        var previewText:String!
+        
+        switch lastMessage.media {
+        case is JSQPhotoMediaItem:
+            previewText = "Image"
+        case is JSQLocationMediaItem:
+            previewText = "Location"
+        case is JSQVideoMediaItem:
+            previewText = "Video"
+        case is JSQAudioMediaItem:
+            previewText = "Audio"
+        default:
+            previewText = lastMessage.text
+            break
+        }
+        
+        /**
+         *  Show name of sender if it's a group
+         *  You can have a validation to check if the last message is yours to prefix it with `Me:`
+         */
+        if conversation.isGroup {
+            previewText = "\(lastMessage.senderDisplayName): \(previewText)"
+        }
+        
+        cell.recentTextLabel.text = previewText
+
+        return cell
+    }
+    
+    //MARK: TableView Delegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("ConversationSegue", sender: indexPath.row)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80
+    }
+    
 }
 
 

@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		06CDF8617707BDAD4696C3F1 /* Pods_SwiftExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51229C5EAF77B085DAE32206 /* Pods_SwiftExample.framework */; };
-		F80276D11CE38FA600063D88 /* DemoConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D01CE38FA600063D88 /* DemoConversation.swift */; };
+		41E44E951CF9092100B36B5E /* jsq_messages_sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 41E44E941CF9090800B36B5E /* jsq_messages_sample.m4a */; };
+		F80276D11CE38FA600063D88 /* DemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D01CE38FA600063D88 /* DemoModel.swift */; };
 		F80276D31CE38FEB00063D88 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D21CE38FEB00063D88 /* Conversation.swift */; };
 		F80276D51CE3915700063D88 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D41CE3915700063D88 /* ChatViewController.swift */; };
 		F80276D71CE3928200063D88 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D61CE3928200063D88 /* ConversationListViewController.swift */; };
@@ -32,9 +33,10 @@
 
 /* Begin PBXFileReference section */
 		172CACF9AF57CFF29818FFA1 /* Pods-SwiftExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftExample/Pods-SwiftExample.release.xcconfig"; sourceTree = "<group>"; };
+		41E44E941CF9090800B36B5E /* jsq_messages_sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = jsq_messages_sample.m4a; sourceTree = "<group>"; };
 		51229C5EAF77B085DAE32206 /* Pods_SwiftExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD543A7F7DF54B0939725BC9 /* Pods-SwiftExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftExample/Pods-SwiftExample.debug.xcconfig"; sourceTree = "<group>"; };
-		F80276D01CE38FA600063D88 /* DemoConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConversation.swift; sourceTree = "<group>"; };
+		F80276D01CE38FA600063D88 /* DemoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModel.swift; sourceTree = "<group>"; };
 		F80276D21CE38FEB00063D88 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		F80276D41CE3915700063D88 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F80276D61CE3928200063D88 /* ConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
@@ -111,10 +113,11 @@
 			children = (
 				F82D09C21CDFBB4900DD74CF /* AppDelegate.swift */,
 				F82D09C41CDFBB4900DD74CF /* ViewController.swift */,
-				F80276D01CE38FA600063D88 /* DemoConversation.swift */,
-				F80276D41CE3915700063D88 /* ChatViewController.swift */,
-				F80276D61CE3928200063D88 /* ConversationListViewController.swift */,
+				F80276D01CE38FA600063D88 /* DemoModel.swift */,
 				F80276D21CE38FEB00063D88 /* Conversation.swift */,
+				F80276D61CE3928200063D88 /* ConversationListViewController.swift */,
+				F80276D41CE3915700063D88 /* ChatViewController.swift */,
+				41E44E941CF9090800B36B5E /* jsq_messages_sample.m4a */,
 				F82D09C61CDFBB4900DD74CF /* Main.storyboard */,
 				F82D09C91CDFBB4900DD74CF /* Assets.xcassets */,
 				F82D09CB1CDFBB4900DD74CF /* LaunchScreen.storyboard */,
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F82D09CD1CDFBB4900DD74CF /* LaunchScreen.storyboard in Resources */,
+				41E44E951CF9092100B36B5E /* jsq_messages_sample.m4a in Resources */,
 				F82D09CA1CDFBB4900DD74CF /* Assets.xcassets in Resources */,
 				F82D09C81CDFBB4900DD74CF /* Main.storyboard in Resources */,
 			);
@@ -285,7 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F80276D31CE38FEB00063D88 /* Conversation.swift in Sources */,
-				F80276D11CE38FA600063D88 /* DemoConversation.swift in Sources */,
+				F80276D11CE38FA600063D88 /* DemoModel.swift in Sources */,
 				F80276D71CE3928200063D88 /* ConversationListViewController.swift in Sources */,
 				F82D09C51CDFBB4900DD74CF /* ViewController.swift in Sources */,
 				F80276D51CE3915700063D88 /* ChatViewController.swift in Sources */,
